@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">№</th>
+      <th scope="col">language</th>
+      <th scope="col">data_start</th>
+      <th scope="col">data_end</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for course in course_list %}
+    <tr>
+      <th scope="row">{{ course.id }}</th>
+      <td>{{ course.language }}</td>
+      <td>{{ course.data_start }}</td>
+      <td>{{ course.data_end}}</td>
+      <td>
+        <a href="{{ url_for('course_update', course_id=course.id) }}">Изменить</a> /
+        <a href="{{ url_for('course_delete', course_id=course.id) }}">Удалить</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

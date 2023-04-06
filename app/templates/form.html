@@ -1,0 +1,32 @@
+. content {
+    background: #foe5dd;
+    padding:50;
+}
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+  {% for field in form %}
+  <div class="form-group">
+    {% if field.widget.input_type != 'hidden' %}
+      {{ field.label }}
+    {% endif %}
+
+    {% if field.errors %}
+      {{ field(class="form-control is-invalid") }}
+
+      {% for error in field.errors %}
+      <div class="invalid-feedback">
+        {{ error }}
+      </div>
+      {% endfor %}
+
+    {% else %}
+      {{ field(class="form-control") }}
+    {% endif %}
+
+  </div>
+  {% endfor %}
+  <button class="btn btn-primary" type="submit">Сохранить</button>
+</form>
+{% endblock content %}

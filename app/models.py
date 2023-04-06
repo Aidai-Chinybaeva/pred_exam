@@ -1,13 +1,11 @@
 from flask_login import UserMixin
 
-from app import db, app, login_manager
+from app import db, app, login_manager, bcrypt
 
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
-
 
 
 class Course(db.Model):
@@ -29,8 +27,7 @@ class User(db.Model):
     username = db.Column(db.String, unique=True, nullable=False)
     password_hash = db.Column(db.String, nullable=False)
 
-
- @property
+    @property
     def password(self):
         return self.password_hash
 
